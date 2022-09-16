@@ -3,7 +3,7 @@ package com.be.forum.User.Service;
 import com.be.forum.User.Converter.UserConverter;
 import com.be.forum.User.Entity.User;
 import com.be.forum.User.Repository.UserRepository;
-import com.be.forum.User.UserDto.UserRequest.UserRequest;
+import com.be.forum.User.UserDto.UserRequest.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -37,13 +37,13 @@ public class UserService {
         return userRepository.findAllByIsRegistered(isRegistered);
     }
 
-    public User createNewUser(UserRequest userRequest) {
-        log.info("User with id {} created", userRequest.getId());
-        return userRepository.save(UserConverter.convertFromRequest(userRequest));
+    public User createNewUser(UserDto userDto) {
+        log.info("User with id {} created", userDto.getId());
+        return userRepository.save(UserConverter.convertFromRequest(userDto));
     }
 
-    public void deleteGivenUser(UserRequest userRequest) {
-        log.info("User with id {} deleted", userRequest.getId());
-        userRepository.delete(UserConverter.convertFromRequest(userRequest));
+    public void deleteGivenUser(UserDto userDto) {
+        log.info("User with id {} deleted", userDto.getId());
+        userRepository.delete(UserConverter.convertFromRequest(userDto));
     }
 }

@@ -1,24 +1,24 @@
 package com.be.forum.User.Converter;
 
 import com.be.forum.User.Entity.User;
-import com.be.forum.User.UserDto.UserRequest.UserRequest;
+import com.be.forum.User.UserDto.UserRequest.UserDto;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class UserConverter {
-    public User convertFromRequest(UserRequest userRepository) {
+    public User convertFromRequest(UserDto userDto) {
         return User.builder()
-                .Id(userRepository.getId())
-                .userName(userRepository.getUserName())
-                .name(userRepository.getName())
-                .surname(userRepository.getSurname())
-                .password(userRepository.getPassword())
-                .mailAddress(userRepository.getMailAddress())
-                .age(userRepository.getAge())
-                .level(userRepository.getLevel())
-                .insDate(userRepository.getInsDate())
-                .isRegistered(userRepository.getIsRegistered())
-                .userType(userRepository.getUserType())
+                .Id(userDto.getId())
+                .userName(userDto.getUserName())
+                .name(userDto.getName())
+                .surname(userDto.getSurname())
+                .password(userDto.getPassword())
+                .mailAddress(userDto.getMailAddress())
+                .age(userDto.getAge())
+                .level(userDto.getLevel())
+                .insDate(userDto.getInsDate())
+                .isRegistered(userDto.getIsRegistered())
+                .userType(userDto.getUserType())
                 .build();
     }
 }
