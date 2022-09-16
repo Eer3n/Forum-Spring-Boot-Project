@@ -1,13 +1,17 @@
 package com.be.forum.User.Service;
 
+import com.be.forum.User.Converter.UserConverter;
 import com.be.forum.User.Entity.User;
 import com.be.forum.User.Repository.UserRepository;
+import com.be.forum.User.UserDto.UserRequest.UserRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class UserService {
 
@@ -19,10 +23,6 @@ public class UserService {
 
     public User findUserById(Long Id) {
         return userRepository.findUserById(Id);
-    }
-
-    public User createNewUser(User user) {
-        return userRepository.save(user);
     }
 
     public User findByUserName(String userName) {
@@ -37,7 +37,13 @@ public class UserService {
         return userRepository.findAllByIsRegistered(isRegistered);
     }
 
-    public void deleteGivenUser(User user) {
-        userRepository.delete(user);
+    public User createNewUser(UserRequest userRequest) {
+        log.info("User with id {} created", userRequest.getId());
+        return userRepository.save(UserConverter.convertFromRequest(userRequest));
+    }
+
+    public void deleteGivenUser(UserRequest userRequest) {
+        log.info("User with id {} deleted", userRequest.getId());
+        userRepository.delete(UserConverter.convertFromRequest(userRequest));
     }
 }

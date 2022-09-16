@@ -3,13 +3,17 @@ package com.be.forum.User.Controller;
 import com.be.forum.User.Entity.User;
 import com.be.forum.User.Repository.UserRepository;
 import com.be.forum.User.Service.UserService;
+import com.be.forum.User.UserDto.UserRequest.UserRequest;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @AllArgsConstructor
@@ -19,11 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
-
-    @GetMapping("/hello")
-    public String helloWorld() {
-        return "Hello World";
-    }
 
     @GetMapping("/{Id}")
     public User findUserById(@PathVariable Long Id) {
@@ -35,13 +34,14 @@ public class UserController {
         return userService.findByUserNameAndPassword(username, password);
     }
 
-    @PostMapping("/create")
-    public void save(@RequestBody User user) {
-        userService.createNewUser(user);
+    @RequestMapping(path = {"/create"}, method = {RequestMethod.POST})
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createNewUser(@RequestBody UserRequest userRequest) {
+        userService.createNewUser(userRequest);
     }
 
-    @PostMapping("/delete")
-    public void delete(@RequestBody User user) {
-        userService.deleteGivenUser(user);
+    @RequestMapping(path = {"/delete"}, method = {RequestMethod.POST})
+    public void deleteGivenUser(@RequestBody UserRequest paymentRequest) {
+        userService.deleteGivenUser(paymentRequest);
     }
 }

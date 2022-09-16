@@ -5,7 +5,6 @@ public enum UserType {
 
     private final String userType;
 
-
     UserType(String userType) {
         this.userType = userType;
     }
