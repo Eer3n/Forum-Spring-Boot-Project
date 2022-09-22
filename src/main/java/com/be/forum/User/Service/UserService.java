@@ -3,7 +3,7 @@ package com.be.forum.User.Service;
 import com.be.forum.User.Converter.UserConverter;
 import com.be.forum.User.Entity.User;
 import com.be.forum.User.Repository.UserRepository;
-import com.be.forum.User.UserDto.UserRequest.UserDto;
+import com.be.forum.User.Dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -21,29 +21,15 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User findByUsernameAndPassword(String username, String password) {
+        return userRepository.findByUsernameAndPassword(username, password);
+    }
+
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public User findUserById(Long Id) {
         return userRepository.findUserById(Id);
-    }
-
-    public User findByUserName(String userName) {
-        return userRepository.findUserByUserName(userName);
-    }
-
-    public User findByUserNameAndPassword(String userName, String password) {
-        return userRepository.findUserByUserNameAndPassword(userName, password);
-    }
-
-    public User findAllByIsRegistered(Boolean isRegistered) {
-        return userRepository.findAllByIsRegistered(isRegistered);
-    }
-
-    public User createNewUser(UserDto userDto) {
-        log.info("User with id {} created", userDto.getId());
-        return userRepository.save(UserConverter.convertFromRequest(userDto));
-    }
-
-    public void deleteGivenUser(UserDto userDto) {
-        log.info("User with id {} deleted", userDto.getId());
-        userRepository.delete(UserConverter.convertFromRequest(userDto));
     }
 }

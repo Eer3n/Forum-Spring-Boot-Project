@@ -1,4 +1,4 @@
-package com.be.forum.User.UserDto.UserRequest;
+package com.be.forum.User.Dto;
 
 import com.be.forum.User.Enum.UserType;
 import lombok.AllArgsConstructor;

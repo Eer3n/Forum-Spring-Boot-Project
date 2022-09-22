@@ -1,7 +1,7 @@
 package com.be.forum.User.Converter;
 
 import com.be.forum.User.Entity.User;
-import com.be.forum.User.UserDto.UserRequest.UserDto;
+import com.be.forum.User.Dto.UserDto;
 import lombok.experimental.UtilityClass;
 
 @UtilityClass
@@ -9,7 +9,7 @@ public class UserConverter {
     public User convertFromRequest(UserDto userDto) {
         return User.builder()
                 .Id(userDto.getId())
-                .userName(userDto.getUserName())
+                .username(userDto.getUserName())
                 .name(userDto.getName())
                 .surname(userDto.getSurname())
                 .password(userDto.getPassword())
@@ -18,7 +18,6 @@ public class UserConverter {
                 .level(userDto.getLevel())
                 .insDate(userDto.getInsDate())
                 .isRegistered(userDto.getIsRegistered())
-                .userType(userDto.getUserType())
                 .build();
     }
 }

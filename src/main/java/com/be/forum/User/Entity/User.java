@@ -1,12 +1,12 @@
 package com.be.forum.User.Entity;
 
 import com.be.forum.Common.Entity.BaseEntity;
+import com.be.forum.User.Enum.Gender;
 import com.be.forum.User.Enum.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.Hibernate;
@@ -29,25 +29,26 @@ import java.util.Objects;
 @Setter
 @ToString
 public class User extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "ID", nullable = false)
     private Long Id;
 
     @Column(name = "USERNAME")
-    private String userName;
+    private String username;
+
+    @Column(name = "MAIL_ADDRESS")
+    private String mailAddress;
+
+    @Column(name = "PASSWORD")
+    private String password;
 
     @Column(name = "NAME")
     private String name;
 
     @Column(name = "SURNAME")
     private String surname;
-
-    @Column(name = "PASSWORD")
-    private String password;
-
-    @Column(name = "MAILADDRESS")
-    private String mailAddress;
 
     @Column(name = "AGE")
     private Integer age;
@@ -60,9 +61,6 @@ public class User extends BaseEntity {
 
     @Column(name = "IS_REGISTERED")
     private Boolean isRegistered;
-
-    @Column(name = "USER_TYPE")
-    private UserType userType;
 
     @Override
     public boolean equals(Object o) {
